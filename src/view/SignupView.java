@@ -1,5 +1,6 @@
 package view;
 
+import interface_adapter.clear_users.ClearState;
 import interface_adapter.clear_users.ClearViewModel;
 import interface_adapter.signup.SignupController;
 import interface_adapter.signup.SignupState;
@@ -36,6 +37,7 @@ public class SignupView extends JPanel implements ActionListener, PropertyChange
         this.clearController = clearController;
         this.clearViewModel = clearViewModel;
         signupViewModel.addPropertyChangeListener(this);
+        clearViewModel.addPropertyChangeListener(this);
 
         JLabel title = new JLabel(SignupViewModel.TITLE_LABEL);
         title.setAlignmentX(Component.CENTER_ALIGNMENT);
@@ -174,9 +176,15 @@ public class SignupView extends JPanel implements ActionListener, PropertyChange
 
     @Override
     public void propertyChange(PropertyChangeEvent evt) {
-        SignupState state = (SignupState) evt.getNewValue();
-        if (state.getUsernameError() != null) {
-            JOptionPane.showMessageDialog(this, state.getUsernameError());
+        if (evt.getNewValue() instanceof SignupState) {
+            SignupState state = (SignupState) evt.getNewValue();
+            if (state.getUsernameError() != null) {
+                JOptionPane.showMessageDialog(this, state.getUsernameError());
+            }
+        }
+        else {
+            ClearState state = (ClearState) evt.getNewValue();
+            JOptionPane.showMessageDialog(this, state.getDeletedUsers());
         }
     }
 }
