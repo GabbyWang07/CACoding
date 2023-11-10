@@ -2,7 +2,7 @@
 
 ## Preamble
 
-This is a 2-week coding exercise
+This is a 2-week coding exercises
 
 You will extend the Clean Architecture implementation to add a use case. It is a
 continuation of this code: https://github.com/paulgries/LoginCleanArchitecture
